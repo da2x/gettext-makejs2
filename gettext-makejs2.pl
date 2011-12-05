@@ -86,17 +86,14 @@ foreach my $script_file (detectScriptFilesFromSourceFiles)
         $next = <i18nin>;
       }
       my $msgstr = '';
-      if (!$fuzzy)
+      if (!$fuzzy && !$next =~ /^\s\z$/)
       {
         if ($next =~ /^msgstr ""\s+$/)
         {
-          while ((my $line = <i18nin>) !~ /^\s+$/)
+          while ((my $line = <i18nin>) !~ /^\s+(?!\z)$/)
           {
-            unless (undef $line)
-            {
-              chomp($line);
-              $msgstr .= substr($line, 1, -1);
-            }
+            chomp($line);
+            $msgstr .= substr($line, 1, -1);
           }
         }
         else
