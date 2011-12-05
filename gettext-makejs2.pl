@@ -86,7 +86,7 @@ foreach my $script_file (detectScriptFilesFromSourceFiles)
         $next = <i18nin>;
       }
       my $msgstr = '';
-      if (!$fuzzy && !$next =~ /^\s\z$/)
+      if (!$fuzzy)
       {
         if ($next =~ /^msgstr ""\s+$/)
         {
@@ -102,7 +102,9 @@ foreach my $script_file (detectScriptFilesFromSourceFiles)
         }
       }
       _decode_entities($msgstr, { nbsp => "\xc2\xa0", ocirc => "\xc3\xb4" });
-      $translated_keypairs .= "  \"$msgid\":\"$msgstr\",\n";
+      $msgstr =~ s/\\\"/\"/g;
+      my $encoded_msgstr = encode_entities($msgstr, '<>&"');
+      $translated_keypairs .= "  \"$msgid\":\"$encoded_msgstr\",\n";
     }
     close i18nin;
     $translated_keypairs = substr($translated_keypairs, 0, -2);
