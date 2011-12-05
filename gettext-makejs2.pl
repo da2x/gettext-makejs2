@@ -90,11 +90,13 @@ foreach my $script_file (detectScriptFilesFromSourceFiles)
       {
         if ($next =~ /^msgstr ""\s+$/)
         {
-          next if $next eq undef;
           while ((my $line = <i18nin>) !~ /^\s+$/)
           {
-            chomp($line);
-            $msgstr .= substr($line, 1, -1);
+            unless (undef $line)
+            {
+              chomp($line);
+              $msgstr .= substr($line, 1, -1);
+            }
           }
         }
         else
