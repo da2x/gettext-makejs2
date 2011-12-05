@@ -90,10 +90,10 @@ foreach my $script_file (detectScriptFilesFromSourceFiles)
       {
         if ($next =~ /^msgstr ""\s+$/)
         {
-          while ((my $line = <i18nin>) !~ /^\s+(?!\z)$/)
+          while ((my $line = <i18nin>) !~ /^\s+$/)
           {
             chomp($line);
-            $msgstr .= substr($line, 1, -1);
+            $msgstr = substr($line, 1, -1);
           }
         }
         else
