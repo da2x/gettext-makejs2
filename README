@@ -1,0 +1,20 @@
+h2. Usage
+@gettext-makejs2 <po-files>@
+
+Finds all .js files from available gettext .po[t] files. Then finds all strings for each file, and outputs them in their own JavaScript files as named object objects.
+
+The script makes the assumption that the .po string bases are stored in the convention: "language/string_dataset.po" and that the output will be in "language/path-to/original.js". This was done to work in the context of a __W3C Widget package’s__ "locales/ folder.":http://www.w3.org/TR/widgets/#container-for-localized-content This tool is primarily written to be used with the Opera and W3C Widget Packaging platform (used in widgets and browser extensions for Opera, and other implementations). But the tool is fairly generic and can be used as is for other uses, or adapted for different needs (it’s open source, alright!).
+
+h2. Options (set a environmental variables)
+
+@GETTEXT_MAKEJS2_SUFFIX@
+Add a file name suffix to the output script name. For example, ".i18n" (default unless "OFF") or "-strings".
+
+@GETTEXT_MAKEJS2_NAME@
+Name of the object object containing the translations. Default is "i18n".
+
+h2. Tips: Making the gettext .po[t] files in the first place …
+
+"xgettext.pl":http://search.cpan.org/~drtech/Locale-Maketext-Lexicon-0.91/script/xgettext.pl will extract will extract strings from JavaScript source files that uses the regular _('string convention') without any additional fuss.
+
+__24 Ways’__ article on "JavaScript Internationalization":http://24ways.org/2007/javascript-internationalisation is a great read.
