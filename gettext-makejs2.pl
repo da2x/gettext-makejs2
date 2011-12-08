@@ -54,7 +54,7 @@ foreach my $script_file (detectScriptFilesFromSourceFiles)
 {
   foreach my $po_source_file (@source_files)
   {
-    $po_source_file =~ /^([a-z]{2,})/;
+    $po_source_file =~ /^([a-z,_,-]{2,7})/;
     my $language = $1;
     my $translated_keypairs = '';
     open(i18nin, "<$po_source_file") or die $!;
